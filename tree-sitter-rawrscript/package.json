@@ -1,0 +1,16 @@
+{
+  "name": "test",
+  "type": "commonjs",
+  "version": "1.0.0",
+  "main": "bindings/node",
+  "license": "MIT",
+  "scripts": {
+    "build": "npx swc grammar -d . && npx tree-sitter generate --abi=13",
+    "test": "npx tree-sitter test"
+  },
+  "dependencies": {
+    "nan": "^2.15.0",
+    "tree-sitter": "^0.20.0",
+    "tree-sitter-cli": "^0.20.6"
+  }
+}

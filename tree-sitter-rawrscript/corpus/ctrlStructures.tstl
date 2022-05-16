@@ -1,0 +1,80 @@
+============
+ifExpression
+============
+
+if (foo) {}
+
+---
+
+(source_file
+	(if_expression
+		(if_body
+			(expression_name))
+		(block)))
+
+
+
+==============
+elseExpression
+==============
+
+if (foo) {
+} else {
+}
+
+---
+
+
+(source_file
+	(if_expression
+		(if_body
+			(expression_name))
+		(block)
+		(else_expression
+			(block))))
+
+
+
+================
+elseIfExpression
+================
+
+if (foo) {
+} else if(foo) {
+}
+
+---
+
+(source_file
+	(if_expression
+		(if_body
+			(expression_name))
+		(block)
+		(else_if_expression
+			(if_body
+				(expression_name))
+			(block))))
+
+
+
+=============
+forExpression
+=============
+
+for (num foo = 0; foo < 10; foo++) {}
+
+---
+
+(source_file
+	(for_expression
+		(for_body
+			(variable_definition
+				(type)
+				(expression_name)
+				(number))
+			(binary_expression
+				(expression_name)
+				(number))
+			(lazy_unary_expression_left
+				(expression_name)))
+		(block)))

@@ -1,0 +1,111 @@
+===============
+variableNoValue
+===============
+
+num foo;
+
+---
+
+(source_file
+	(variable_definition
+		(type)
+		(expression_name)))
+
+
+=============
+variableValue
+=============
+
+num foo = 123;
+
+---
+
+(source_file
+	(variable_definition
+		(type)
+		(expression_name)
+		(number)))
+
+
+
+====================
+lazyUnaryExpressions
+====================
+
+foo++;
+++foo;
+foo--;
+--foo;
+
+---
+
+(source_file
+	(lazy_unary_expression_left
+		(expression_name))
+	(lazy_unary_expression_right
+		(expression_name))
+	(lazy_unary_expression_left
+		(expression_name))
+	(lazy_unary_expression_right
+		(expression_name)))
+
+
+
+=====================
+lazyBinaryExpressions
+=====================
+
+foo += foo;
+foo -= foo;
+foo *= foo;
+foo /= foo;
+foo %= foo;
+
+---
+
+(source_file
+	(lazy_binary_expression
+		(expression_name)
+		(expression_name))
+	(lazy_binary_expression
+		(expression_name)
+		(expression_name))
+	(lazy_binary_expression
+		(expression_name)
+		(expression_name))
+	(lazy_binary_expression
+		(expression_name)
+		(expression_name))
+	(lazy_binary_expression
+		(expression_name)
+		(expression_name)))
+
+
+
+===========
+arrayAccess
+===========
+
+num foo = baa[1];
+num foo = baa[1][2];
+
+---
+
+(source_file
+	(variable_definition
+		(type)
+		(expression_name)
+		(array_access
+			(expression_name)
+			(array_index
+				(number))))
+	(variable_definition
+		(type)
+		(expression_name)
+		(array_access
+			(array_access
+				(expression_name)
+				(array_index
+					(number)))
+			(array_index
+				(number)))))

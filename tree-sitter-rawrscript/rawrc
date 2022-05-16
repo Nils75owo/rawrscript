@@ -1,0 +1,8 @@
+importJS lib "stdlib" as std;
+import file "test.rawrs" as foo;
+importJS file "test" as baa;
+using std::print;
+
+print("hi :>");
+
+baa::sayHi();

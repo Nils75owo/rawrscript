@@ -1,0 +1,6 @@
+/modules
+grammar.js
+src/tree_sitter/
+src/node-types.json
+src/parser.c
+src/grammar.json

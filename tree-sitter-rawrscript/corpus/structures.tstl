@@ -1,0 +1,261 @@
+========
+comments
+========
+
+
+// foo
+/*
+baa
+*/
+
+---
+
+(source_file
+  (comment)
+  (comment))
+
+
+
+===============
+internalSetting
+===============
+
+@foo false
+@baa "/usr/bin"
+@baz 123
+
+---
+
+(source_file
+  (internal_setting
+    (expression_name)
+    (bool))
+  (internal_setting
+    (expression_name)
+    (string_expression))
+  (internal_setting
+    (expression_name)
+    (number)))
+
+================
+unaryExpressions
+================
+
+num foo = -1;
+
+---
+
+(source_file
+  (variable_definition
+    (type)
+    (expression_name)
+    (unary_expression
+      (number))))
+
+
+
+=================
+binaryExpressions
+=================
+
+num foo = 1 + 2 * 3;
+
+---
+
+(source_file
+  (variable_definition
+    (type)
+    (expression_name)
+    (binary_expression
+      (number)
+      (binary_expression
+        (number)
+        (number)))))
+
+
+
+==================
+booleanExpressions
+==================
+
+bool foo = true || (false && (1 == 1)) || 1 != 1;
+
+---
+
+(source_file
+  (variable_definition
+    (type)
+    (expression_name)
+    (binary_expression
+      (binary_expression
+        (bool)
+        (encapsulated
+          (binary_expression
+            (bool)
+            (encapsulated
+              (binary_expression
+                (number)
+                (number))))))
+      (binary_expression
+        (number)
+        (number)))))
+
+============
+encapsulated
+============
+
+num foo = ((1 + 2) * 3) / 4;
+
+---
+
+(source_file
+  (variable_definition
+    (type)
+    (expression_name)
+    (binary_expression
+      (encapsulated
+        (binary_expression
+          (encapsulated
+            (binary_expression
+              (number)
+              (number)))
+          (number)))
+      (number))))
+
+
+===============
+returnStatement
+===============
+
+func foo() {
+  return 123;
+}
+
+---
+
+(source_file
+  (function_definition
+    (expression_name)
+    (parameter_list)
+    (block
+      (return_statement
+        (number)))))
+
+
+
+==================
+variableAssignment
+==================
+
+foo = 1;
+baa[1][2] = 3;
+
+---
+
+(source_file
+  (variable_assignment
+    (expression_name)
+    (number))
+  (variable_assignment
+    (expression_name)
+    (array_index
+      (number))
+    (array_index
+      (number))
+    (number)))
+
+
+
+===================
+namespaceDefinition
+===================
+
+namespace foo {
+  num baa = 123;
+}
+
+---
+
+(source_file
+  (namespace_declaration
+    (namespace_token)
+    (expression_name)
+    (block
+      (variable_definition
+        (type)
+        (expression_name)
+        (number)))))
+
+
+
+===============
+namespaceAccess
+===============
+
+foo::baa = 123;
+
+---
+
+
+(source_file
+  (variable_assignment
+    (expression_name
+      (namespace_access
+        (expression_name)
+        (expression_name)))
+    (number)))
+
+
+
+=====
+using
+=====
+
+using foo;
+
+---
+
+
+(source_file
+  (using_statement
+    (using_token)
+    (expression_name)))
+
+
+
+===============
+importStatement
+===============
+
+import file "foo" as baa;
+import lib "foo" as baa;
+
+---
+
+(source_file
+  (import_statement
+    (string_expression)
+    (expression_name))
+  (import_statement
+    (string_expression)
+    (expression_name)))
+
+
+
+
+==================
+importJSStatement
+==================
+
+importJS file "foo" as baa;
+importJS lib "foo" as baa;
+
+---
+
+(source_file
+  (importJS_statement
+    (string_expression)
+    (expression_name))
+  (importJS_statement
+    (string_expression)
+    (expression_name)))

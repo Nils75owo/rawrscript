@@ -1,0 +1,119 @@
+=====================
+functionDefinitionMin
+=====================
+
+func foo() {}
+
+---
+
+(source_file
+  (function_definition
+    name: (expression_name)
+    parameters: (parameter_list)
+    code: (block)))
+
+
+
+=====================
+functionDefinitionMax
+=====================
+
+func foo(num baa, void baa)<silent> num[] {
+}
+
+---
+
+(source_file
+  (function_definition
+    name: (expression_name)
+    parameters: (parameter_list
+      params: (parameter
+        type: (type)
+        name: (expression_name))
+      params: (parameter
+        type: (type)
+        name: (expression_name)))
+    args: (const_args
+      args: (expression_name))
+    returnType: (type
+      (array_type
+        (type)))
+    code: (block)))
+
+
+
+=============
+functionCalls
+=============
+
+foo(1, 2);
+foo(baa(), baz());
+
+---
+
+(source_file
+  (function_call
+    name: (expression_name)
+    parameters: (function_call_parameters
+      (number)
+      (number)))
+  (function_call
+    name: (expression_name)
+    parameters: (function_call_parameters
+      (function_call
+        name: (expression_name)
+        parameters: (function_call_parameters))
+      (function_call
+        name: (expression_name)
+        parameters: (function_call_parameters)))))
+
+
+
+======================
+functionCallsConstArgs
+======================
+
+foo(1, 2)<silent>;
+foo(1, 2)<!silent>;
+
+---
+
+(source_file
+  (function_call
+    name: (expression_name)
+    parameters: (function_call_parameters
+      (number)
+      (number))
+    constArgs: (const_args
+      args: (expression_name)))
+  (function_call
+    name: (expression_name)
+    parameters: (function_call_parameters
+      (number)
+      (number))
+    constArgs: (const_args
+      args: (unary_expression
+      (expression_name)))))
+
+
+
+
+=====================
+namespaceFunctionCall
+=====================
+
+foo::baa(1, 2)<silent>;
+
+---
+
+(source_file
+  (function_call
+    (expression_name
+      (namespace_access
+        (expression_name)
+        (expression_name)))
+    (function_call_parameters
+      (number)
+      (number))
+    (const_args
+      (expression_name))))

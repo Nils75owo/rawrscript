@@ -1,0 +1,11 @@
+tsconfig.json
+build/
+node_modules/
+tree-sitter-rawrscript/bindings/
+tree-sitter-rawrscript/build/
+tree-sitter-rawrscript/binding.gyp
+tree-sitter-rawrscript/Cargo.toml
+tree-sitter-rawrscript/package-lock.json
+yarn.lock
+.brazil/
+.ccls-cache

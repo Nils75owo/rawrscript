@@ -1,0 +1,159 @@
+=====
+types
+=====
+
+void foo;
+num foo;
+string foo;
+bool foo;
+auto foo;
+
+---
+
+(source_file
+  (variable_definition
+    (type)
+    (expression_name))
+  (variable_definition
+    (type)
+    (expression_name))
+  (variable_definition
+    (type)
+    (expression_name))
+  (variable_definition
+    (type)
+    (expression_name))
+  (variable_definition
+    (expression_name)))
+
+=======
+numbers
+=======
+
+num foo = 1;
+num baa = 3.141;
+
+---
+
+(source_file
+  (variable_definition
+    (type)
+    (expression_name)
+    (number))
+  (variable_definition
+    (type)
+    (expression_name)
+    (number)))
+
+
+============
+basicStrings
+============
+
+string foo = "abc123öäü  '` \" ";
+string foo = 'abc123öäü  "` \' ';
+
+---
+
+(source_file
+  (variable_definition
+    (type)
+    (expression_name)
+    (string_expression))
+  (variable_definition
+    (type)
+    (expression_name)
+    (string_expression)))
+
+
+
+===============
+templateStrings
+===============
+
+string foo = `abc123
+öäü  '" \` 
+`;
+
+---
+
+(source_file
+  (variable_definition
+    (type)
+    (expression_name)
+    (string_expression
+      (template_string
+        (template_chars)
+        (escape_sequence)
+          (template_chars)))))
+
+======
+arrays
+======
+
+num[] foo = [ 1, 2, 3, 4, 5, 6 ];
+
+---
+
+(source_file
+  (variable_definition
+    type: (type
+      (array_type
+        (type)))
+    name: (expression_name)
+    assignment: (array_expression
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number))))
+
+
+
+=========
+subArrays
+=========
+
+
+num[][] foo = [ [ 1, 2 ], [ 3 ], [ 4, 5, 6 ] ];
+
+---
+
+(source_file
+  (variable_definition
+    type: (type
+      (array_type
+        (type
+          (array_type
+            (type)))))
+    name: (expression_name)
+    assignment: (array_expression
+      (array_expression
+        (number)
+        (number))
+      (array_expression
+        (number))
+      (array_expression
+        (number)
+        (number)
+        (number)))))
+
+========
+booleans
+========
+
+bool foo = true;
+bool baa = false;
+
+---
+
+(source_file
+  (variable_definition
+    (type)
+    (expression_name)
+    (bool))
+  (variable_definition
+    (type)
+    (expression_name)
+    (bool)))
